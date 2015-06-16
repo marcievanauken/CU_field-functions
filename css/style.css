@@ -309,6 +309,11 @@ nav .navbar-right p{
     padding:100px 0;
 }
 
+ul
+{
+    list-style-type: none;
+}
+
 .giving-form {
     width:100%;
     background-color: rgba(242, 242, 242, 0.95);
@@ -421,6 +426,10 @@ nav .navbar-right p{
     color:#000000;
     float:left;
     margin-left:2px;
+}
+
+.focus {
+    display:none;
 }
 
 input.empty {

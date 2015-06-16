@@ -22,25 +22,46 @@ $('.navbar-collapse ul li a').click(function() {
 
 
 $(document).ready(function(){
-      //form slider
-      $('.resslider').bxSlider({
-          nextSelector: '#slider-next',
-          prevSelector: '#slider-prev',
-          nextText: '<i class="fa fa-chevron-circle-right fa-3x" style="color:#92abbc;"></i>',
-          prevText: '<i class="fa fa-chevron-circle-left fa-3x" style="color:#92abbc;"></i>'
-        });
-
-      $('#iconified').on('keyup', function() {
-            var input = $(this);
-            if(input.val().length === 0) {
-                input.addClass('empty');
-            } else {
-                input.removeClass('empty');
-            }
-        });
 
     
-    // Background Imaeg fader
+    //shows placeholder text outside of field when clicked
+    
+    // $("input").focus(function(){ 
+    //   $(this).next(".focus").css("display", "block");
+    // });
+
+    $("input").on('keydown', function(){
+      $(this).next(".focus").show();
+    });
+
+    $("input").blur(function(){
+      $(".focus").hide();
+    });
+
+    //  $("input").on('keydown', function(){
+    //   if ($("input").is(":focus")) {
+    //     $(".focus").show();
+    //   } else {
+    //     $(".focus").hide();
+    //   }
+    // });
+
+
+
+  
+
+    //making placeholder fontawesome icon
+    $('#iconified').on('keyup', function() {
+          var input = $(this);
+          if(input.val().length === 0) {
+              input.addClass('empty');
+          } else {
+              input.removeClass('empty');
+          }
+      });
+
+    
+    // Background Image fader
     $('#slideshow').cycle({
         fx: 'fade',
         pager: '#smallnav', 

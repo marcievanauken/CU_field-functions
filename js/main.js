@@ -1,54 +1,21 @@
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
-
-// Highlight the top nav as scrolling occurs
-$('body').scrollspy({
-    target: '.navbar-fixed-top'
-})
-
-// Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-    $('.navbar-toggle:visible').click();
-});
-
 
 $(document).ready(function(){
 
     
     //shows placeholder text outside of field when clicked
-    
-    // $("input").focus(function(){ 
-    //   $(this).next(".focus").css("display", "block");
-    // });
-
-    $("input").on('keydown', function(){
-      $(this).next(".focus").show();
+    $("input").on('keydown', function(e){
+      var code = (e.keyCode || e.which);
+      if(code == 16 || code == 9) {
+        return;
+      }
+      $(this).next(".focus").fadeIn();
     });
 
     $("input").blur(function(){
-      $(".focus").hide();
+      $(".focus").fadeOut();
     });
 
-    //  $("input").on('keydown', function(){
-    //   if ($("input").is(":focus")) {
-    //     $(".focus").show();
-    //   } else {
-    //     $(".focus").hide();
-    //   }
-    // });
-
-
-
-  
 
     //making placeholder fontawesome icon
     $('#iconified').on('keyup', function() {

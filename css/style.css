@@ -428,8 +428,23 @@ ul
     margin-left:2px;
 }
 
+/*.focus {
+    display:none;
+    float: right;
+    margin:-27px 13px;
+    color:#a3a3a3;
+}*/
+
 .focus {
     display:none;
+    position: absolute;
+    margin:-57px 7px;
+    color:#ffffff;
+    font-size: 9pt;
+    padding:5px 6px 4px 6px;
+    background-color:#346186;
+    border-radius: 5px;
+    letter-spacing: .5px;
 }
 
 input.empty {

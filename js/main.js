@@ -17,6 +17,34 @@ $(document).ready(function(){
     });
 
 
+
+
+    //regex to validate email
+    function validateEmail(email) { 
+  
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+    }
+
+    function validate(){
+      $("#result").text("");
+      var email = $("#email").val();
+      if (validateEmail(email)) {
+        console.log("email is valid - yay!")
+      } else {
+        $("#result").text(email + " is not valid a valid email address");
+        $("#result").css("color", "red");
+      }
+      return false;
+    }
+
+    $("form").bind("submit", validate);
+
+
+
+
+
+
     //making placeholder fontawesome icon
     $('#iconified').on('keyup', function() {
           var input = $(this);

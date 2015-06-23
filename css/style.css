@@ -447,11 +447,29 @@ ul
     letter-spacing: .5px;
 }
 
+.correct {
+    color:#3fdc55;
+    display: none;
+    float:right;
+    margin:-27px 7px;
+}
+
+.incorrect {
+    color:#ff0000;
+    display: none;
+    float:right;
+    margin:-48px 7px;
+}
+
 input.empty {
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
     text-decoration: inherit;
+}
+
+.count {
+    background-color: blue;
 }
 
 .outside {

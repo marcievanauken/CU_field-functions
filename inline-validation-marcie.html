@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<form action="" onsubmit="return validateForm()">
+	<div>
+	    <input type="text" class="form-control fname" placeholder="First Name" name="fname" id="fname" onblur="validateName(fname)" /><span class="focus">First Name</span>
+      <span id="fnameError" style="display: none;">You can only use alphabetic characters, hyphens and apostrophes</span>
+	</div>
+
+	<div>
+	    <input  id="email" type="text" class="form-control" placeholder="Email" name="email" onblur="validateEmail(value)" /><span class="focus">Email</span>
+	    <span id="emailError" style="display: none;">You must enter a valid email address</span>
+	</div>
+	<div>
+	    <input  id="thing" type="text" class="form-control" placeholder="Thing" name="thing" /><span class="focus">Email</span>
+	    <span id="emailError" style="display: none;">You must enter a valid email address</span>
+	</div>
+
+	<div>
+		<input type="submit" id="submit" name="submit" value="Submit" />
+	</div>
+</form>
+
+
+
+
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript">
+
+
+		function validateName(fname) { 
+      var reName = /^[a-zA-Z-' ]+$/;
+      if(reName.test(fname)){
+        $("#fname").css("background-color", "#ccffcc");
+        $("#fnameError").css("display", "none");
+        return true;
+      }else{
+        $("#fname").css("background-color", "#e35152");
+        $("#fnameError").css("display", "block");
+        return false;
+      }
+    };
+
+		function validateEmail(email){ 
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(re.test(email)){
+      	$("#email").css("background-color", "#ccffcc");
+      	$("#emailError").css("display", "none");
+      	return true;
+      }else{
+      	$("#email").css("background-color", "#e35152");
+      	$("#emailError").css("display", "block");
+        return false;
+      }
+    }
+
+	
+
+    function validateForm(){
+      
+      // Set error catcher
+      var error = 0;
+      
+      // Validate email
+      if(!validateEmail(document.getElementById('email').value)){
+        document.getElementById('emailError').style.display = "block";
+        error++;
+      };
+      
+      // Don't submit form if there are errors
+      if(error > 0){
+        return false;
+      };
+    
+    }; //end validate form 
+
+
+
+	
+    
+
+
+	</script>
+</body>
+</html>

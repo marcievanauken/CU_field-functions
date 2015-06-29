@@ -1,6 +1,6 @@
-console.log("yo main5.js");
 $(document).ready(function(){
-    
+
+
     //shows placeholder text outside of field when clicked
     $("input").on('keydown', function(e){
       var code = (e.keyCode || e.which);
@@ -36,10 +36,10 @@ $(document).ready(function(){
     // };
 
     //validate zip code
-    function validateZip(zipcode) {
-      var reZip = /^(\d{5}$)|(^\d{5}-\d{4})$/
-    return reZip.test(zipcode);
-    }
+    // function validateZip(zipcode) {
+    //   var reZip = /^(\d{5}$)|(^\d{5}-\d{4})$/
+    // return reZip.test(zipcode);
+    // }
 
     //validate phone number
     function validatePhoneNum(phone) {
@@ -66,31 +66,22 @@ $(document).ready(function(){
     };
 
     // INLINE VALIDATION
-
-    // var correct = $(this).blur(function(){
-    //   $(this).parent().find(".error").hide();
-    //   $(this).parent().find(".correct").fadeIn();
-    //   $(this).parent().find(".incorrect").hide();
-    // });
-
-
-
+  
     //name validation (first and last)
     $(".validName").blur(function(){
       var name = $(this).val();
       var nameCount = name.length;
       console.log(name + " " + nameCount);
-        if (validateName(name) && nameCount >= 2){
+        if (nameCount === 0 || nameCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+        else if (validateName(name) && nameCount >= 2){
           console.log("good!");
             // return correct;
-            $(this).parent().find(".error").hide();
+            $(this).parent().find(".error").fadeOut();
             $(this).parent().find(".correct").fadeIn();
             $(this).parent().find(".incorrect").hide();  
-        } else if (name = " " || name === 0) {
-          console.log("Nothing was entered");
-            $(this).parent().find(".error").hide();
-            $(this).parent().find(".correct").hide();
-            $(this).parent().find(".incorrect").hide();
         } else {
           console.log("NOT good");
             $(this).parent().find(".error").show();
@@ -102,14 +93,16 @@ $(document).ready(function(){
     //address validation
     $(".validLetNum").blur(function(){
       var letnum = $(this).val();
-        if (validateLetterNum(letnum)) {
+      var letnumCount = letnum.length;
+        if (letnumCount === 0 || letnumCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+        else if (validateLetterNum(letnum)) {
           console.log("letnum is good!");
           $(this).parent().find(".error").hide();
           $(this).parent().find(".correct").fadeIn();
           $(this).parent().find(".incorrect").hide();
-        } else if (letnum = " " || letnum === 0) {
-            console.log("Nothing was entered");
-            $(this).parent().find(".error").hide();
         } else {
             console.log("letnum is NOT good");
             $(this).parent().find(".error").show();
@@ -118,40 +111,19 @@ $(document).ready(function(){
         }
     });
 
-    //zipcode validation
-    $("#zip").blur(function(){
-      var zip = $("#zip").val();
-      if (validateZip(zip)) {
-        console.log("zipcode is good!");
-        $(this).parent().find(".error").hide();
-        $(this).parent().find(".correct").fadeIn();
-        $(this).parent().find(".incorrect").hide();
-      } else if (zip = " " || zip === 0) {
-          console.log("Nothing was entered");
-          $(this).parent().find(".error").hide();
-          $(this).parent().find(".correct").hide();
-          $(this).parent().find(".incorrect").hide();
-      } else {
-          console.log("zipcode is NOT good");
-          $(this).parent().find(".error").show();
-          $(this).parent().find(".correct").hide();
-          $(this).parent().find(".incorrect").fadeIn();
-      }
-    });
-
     //phone number validation
     $("#phone").blur(function(){
       var phone = $("#phone").val();
-      if (validatePhoneNum(phone)) {
+      var phoneCount = phone.length;
+      if (phoneCount === 0 || phoneCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validatePhoneNum(phone)) {
         console.log("phone is good!");
         $(this).parent().find(".error").hide();
         $(this).parent().find(".correct").fadeIn();
         $(this).parent().find(".incorrect").hide();
-      } else if (phone = " " || phone === 0) {
-          console.log("Nothing was entered");
-          $(this).parent().find(".error").hide();
-          $(this).parent().find(".correct").hide();
-          $(this).parent().find(".incorrect").hide();
       } else {
         console.log("phone is NOT good");
           $(this).parent().find(".error").show();
@@ -163,16 +135,16 @@ $(document).ready(function(){
     //email validation
     $("#email").blur(function(){
       var email = $("#email").val();
-      if (validateEmail(email)) {
+      var emailCount = email.length;
+      if (emailCount === 0 || emailCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validateEmail(email)) {
         console.log("email is good!");
         $(this).parent().find(".error").hide();
         $(this).parent().find(".correct").fadeIn();
         $(this).parent().find(".incorrect").hide();
-      } else if (email = " " || email === 0) {
-          console.log("Nothing was entered");
-          $(this).parent().find(".error").hide();
-          $(this).parent().find(".correct").hide();
-          $(this).parent().find(".incorrect").hide();
       } else {
           console.log("email is not good!");
           $(this).parent().find(".error").show();
@@ -184,16 +156,16 @@ $(document).ready(function(){
     //date validation
     $("#date").blur(function(){
       var date = $("#date").val();
-      if (validateDate(date)) {
+      var dateCount = date.length;
+      if (dateCount === 0 || dateCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validateDate(date)) {
         console.log("date is good!");
         $(this).parent().find(".error").hide();
         $(this).parent().find(".correct").fadeIn();
         $(this).parent().find(".incorrect").hide();
-      } else if (date = " " || date === 0) {
-          console.log("Nothing was entered");
-          $(this).parent().find(".error").hide();
-          $(this).parent().find(".correct").hide();
-          $(this).parent().find(".incorrect").hide();
       } else {
           console.log("date is not good!");
           $(this).parent().find(".error").show();
@@ -205,16 +177,16 @@ $(document).ready(function(){
     //domain validation
     $("#website").blur(function(){
       var domain = $("#website").val();
-      if (validateDomain(domain)) {
+      var domainCount = domain.length;
+      if (domainCount === 0 || domainCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validateDomain(domain)) {
         console.log("domain is good!");
         $(this).parent().find(".error").hide();
         $(this).parent().find(".correct").fadeIn();
         $(this).parent().find(".incorrect").hide();
-      } else if (domain = " " || domain === 0) {
-          console.log("Nothing was entered");
-          $(this).parent().find(".error").hide();
-          $(this).parent().find(".correct").hide();
-          $(this).parent().find(".incorrect").hide();
       } else {
           console.log("domain is not good!");
           $(this).parent().find(".error").show();

@@ -78,7 +78,6 @@ $(document).ready(function(){
         }
         else if (validateName(name) && nameCount >= 2){
           console.log("good!");
-            // return correct;
             $(this).parent().find(".error").fadeOut();
             $(this).parent().find(".correct").fadeIn();
             $(this).parent().find(".incorrect").hide();  

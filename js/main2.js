@@ -10,10 +10,6 @@ $(document).ready(function(){
       $(this).next(".focus").fadeIn();
     });
 
-    $("input").blur(function(){
-      $(".focus").fadeOut();
-    });
-
     
     //ERROR CHECKING - REGEX FUNCTIONS
   
@@ -28,18 +24,6 @@ $(document).ready(function(){
       var reAddress = /^[a-zA-Z\s\d\/.]*\d[a-zA-Z\s\d\/.]*$/
     return reAddress.test(letnum);
     };
-
-    //validate apartment number
-    // function validateAptNum(aptnum) {
-    //   var reAptNum = /^[a-zA-Z0-9 ]+$/
-    // return reAptNum.test(aptnum);
-    // };
-
-    //validate zip code
-    // function validateZip(zipcode) {
-    //   var reZip = /^(\d{5}$)|(^\d{5}-\d{4})$/
-    // return reZip.test(zipcode);
-    // }
 
     //validate phone number
     function validatePhoneNum(phone) {
@@ -65,181 +49,117 @@ $(document).ready(function(){
     return reDomain.test(domain);
     };
 
-    // INLINE VALIDATION
-
-    $("input").blur(function(){
-
-      var name = $(this).val();
-      var nameCount = name.length;
-
-      var nothingEntered = function nothingEntered() {
-        $(this).parent().find(".error").hide();
-      }
-
-      var regexGood = function regexGood() {
-        $(this).parent().find(".error").fadeOut();
-        $(this).parent().find(".correct").fadeIn();
-        $(this).parent().find(".incorrect").hide(); 
-      }
-
-      var regexBad = function regexBad(){
-        $(this).parent().find(".error").show();
-        $(this).parent().find(".correct").hide();
-        $(this).parent().find(".incorrect").fadeIn();
-      }
-
-        $(".validName").blur(function(){
-          console.log(name + " " + nameCount);
-            if (nameCount === 0 || nameCount == " "){
+    //INLINE VALIDATION
+    //name validation (first and last)
+    $(".validName").blur(function () {
+        var name = $(this).val();
+        var nameCount = name.length;
+        console.log(name + " " + nameCount);
+        if (nameCount === 0 || nameCount == " ") {
             console.log("nothing was entered");
-              return nothingEntered;
-            }
-            else if (validateName(name) && nameCount >= 2){
+            $(this).parent().find(".error").hide();
+        }
+        else if (validateName(name) && nameCount >= 2) {
             console.log("good!");
-              return regexGood; 
-            } else {
-              console.log("NOT good");
-              return regexBad; 
-            }
-         });
+            inlineValidate(this, { '.error': 'hide', '.correct': 'fadeIn', '.incorrect': 'hide' });
+        } else {
+            console.log("NOT good");
+            inlineValidate(this, { '.error': 'show', '.correct': 'hide', '.incorrect': 'fadeIn' });
+        }
+    });
 
+    //address validation
+    $(".validLetNum").blur(function () {
+        var letnum = $(this).val();
+        var letnumCount = letnum.length;
+        if (letnumCount === 0 || letnumCount == " ") {
+            console.log("nothing was entered");
+            $(this).parent().find(".error").hide();
+        }
+        else if (validateLetterNum(letnum)) {
+            console.log("letnum is good!");
+            inlineValidate(this, { '.error': 'fadeOut', '.correct': 'fadeIn', '.incorrect': 'hide' });
+        } else {
+            console.log("letnum is NOT good");
+            inlineValidate(this, { '.error': 'show', '.correct': 'hide', '.incorrect': 'fadeIn' });
+        }
+    });
 
-      
+    //phone number validation
+    $("#phone").blur(function(){
+      var phone = $("#phone").val();
+      var phoneCount = phone.length;
+      if (phoneCount === 0 || phoneCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validatePhoneNum(phone)) {
+          console.log("phone is good!");
+          inlineValidate(this, { '.error': 'hide', '.correct': 'fadeIn', '.incorrect': 'hide' });
+      } else {
+        console.log("phone is NOT good");
+          inlineValidate(this, { '.error': 'show', '.correct': 'hide', '.incorrect': 'fadeIn' });
+      }
+    });
 
-    nothingEntered();
-    regexGood();
-    regexBad();
+    //email validation
+    $("#email").blur(function(){
+      var email = $("#email").val();
+      var emailCount = email.length;
+      if (emailCount === 0 || emailCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validateEmail(email)) {
+        console.log("email is good!");
+          inlineValidate(this, { '.error': 'hide', '.correct': 'fadeIn', '.incorrect': 'hide' });
+      } else {
+          console.log("email is not good!");
+          inlineValidate(this, { '.error': 'show', '.correct': 'hide', '.incorrect': 'fadeIn' });
+      }
+    });
 
-    }); // end inline validation
+    //date validation
+    $("#date").blur(function(){
+      var date = $("#date").val();
+      var dateCount = date.length;
+      if (dateCount === 0 || dateCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validateDate(date)) {
+        console.log("date is good!");
+          inlineValidate(this, { '.error': 'hide', '.correct': 'fadeIn', '.incorrect': 'hide' });
+      } else {
+          console.log("date is not good!");
+          inlineValidate(this, { '.error': 'show', '.correct': 'hide', '.incorrect': 'fadeIn' });
+      }
+    });
 
+    //domain validation
+    $("#website").blur(function(){
+      var domain = $("#website").val();
+      var domainCount = domain.length;
+      if (domainCount === 0 || domainCount == " "){
+          console.log("nothing was entered");
+          $(this).parent().find(".error").hide();
+        }
+      else if (validateDomain(domain)) {
+          console.log("domain is good!");
+          inlineValidate(this, { '.error': 'hide', '.correct': 'fadeIn', '.incorrect': 'hide' });
+      } else {
+          console.log("domain is not good!");
+          inlineValidate(this, { '.error': 'show', '.correct': 'hide', '.incorrect': 'fadeIn' });
+      }
+    });
 
-  
-    // //name validation (first and last)
-    // $(".validName").blur(function(){
-      
-    //   console.log(name + " " + nameCount);
-    //     if (nameCount === 0 || nameCount == " "){
-    //       console.log("nothing was entered");
-    //       $(this).parent().find(".error").hide();
-    //     }
-    //     else if (validateName(name) && nameCount >= 2){
-    //       console.log("good!");
-    //         // return correct;
-    //         $(this).parent().find(".error").fadeOut();
-    //         $(this).parent().find(".correct").fadeIn();
-    //         $(this).parent().find(".incorrect").hide();  
-    //     } else {
-    //       console.log("NOT good");
-    //         $(this).parent().find(".error").show();
-    //         $(this).parent().find(".correct").hide();
-    //         $(this).parent().find(".incorrect").fadeIn();
-    //     }
-    // });
-
-    // //address validation
-    // $(".validLetNum").blur(function(){
-    //   var letnum = $(this).val();
-    //   var letnumCount = letnum.length;
-    //     if (letnumCount === 0 || letnumCount == " "){
-    //       console.log("nothing was entered");
-    //       $(this).parent().find(".error").hide();
-    //     }
-    //     else if (validateLetterNum(letnum)) {
-    //       console.log("letnum is good!");
-    //       $(this).parent().find(".error").hide();
-    //       $(this).parent().find(".correct").fadeIn();
-    //       $(this).parent().find(".incorrect").hide();
-    //     } else {
-    //         console.log("letnum is NOT good");
-    //         $(this).parent().find(".error").show();
-    //         $(this).parent().find(".correct").hide();
-    //         $(this).parent().find(".incorrect").fadeIn();
-    //     }
-    // });
-
-    // //phone number validation
-    // $("#phone").blur(function(){
-    //   var phone = $("#phone").val();
-    //   var phoneCount = phone.length;
-    //   if (phoneCount === 0 || phoneCount == " "){
-    //       console.log("nothing was entered");
-    //       $(this).parent().find(".error").hide();
-    //     }
-    //   else if (validatePhoneNum(phone)) {
-    //     console.log("phone is good!");
-    //     $(this).parent().find(".error").hide();
-    //     $(this).parent().find(".correct").fadeIn();
-    //     $(this).parent().find(".incorrect").hide();
-    //   } else {
-    //     console.log("phone is NOT good");
-    //       $(this).parent().find(".error").show();
-    //       $(this).parent().find(".correct").hide();
-    //       $(this).parent().find(".incorrect").fadeIn();
-    //   }
-    // });
-
-    // //email validation
-    // $("#email").blur(function(){
-    //   var email = $("#email").val();
-    //   var emailCount = email.length;
-    //   if (emailCount === 0 || emailCount == " "){
-    //       console.log("nothing was entered");
-    //       $(this).parent().find(".error").hide();
-    //     }
-    //   else if (validateEmail(email)) {
-    //     console.log("email is good!");
-    //     $(this).parent().find(".error").hide();
-    //     $(this).parent().find(".correct").fadeIn();
-    //     $(this).parent().find(".incorrect").hide();
-    //   } else {
-    //       console.log("email is not good!");
-    //       $(this).parent().find(".error").show();
-    //       $(this).parent().find(".correct").hide();
-    //       $(this).parent().find(".incorrect").fadeIn();
-    //   }
-    // });
-
-    // //date validation
-    // $("#date").blur(function(){
-    //   var date = $("#date").val();
-    //   var dateCount = date.length;
-    //   if (dateCount === 0 || dateCount == " "){
-    //       console.log("nothing was entered");
-    //       $(this).parent().find(".error").hide();
-    //     }
-    //   else if (validateDate(date)) {
-    //     console.log("date is good!");
-    //     $(this).parent().find(".error").hide();
-    //     $(this).parent().find(".correct").fadeIn();
-    //     $(this).parent().find(".incorrect").hide();
-    //   } else {
-    //       console.log("date is not good!");
-    //       $(this).parent().find(".error").show();
-    //       $(this).parent().find(".correct").hide();
-    //       $(this).parent().find(".incorrect").fadeIn();
-    //   }
-    // });
-
-    // //domain validation
-    // $("#website").blur(function(){
-    //   var domain = $("#website").val();
-    //   var domainCount = domain.length;
-    //   if (domainCount === 0 || domainCount == " "){
-    //       console.log("nothing was entered");
-    //       $(this).parent().find(".error").hide();
-    //     }
-    //   else if (validateDomain(domain)) {
-    //     console.log("domain is good!");
-    //     $(this).parent().find(".error").hide();
-    //     $(this).parent().find(".correct").fadeIn();
-    //     $(this).parent().find(".incorrect").hide();
-    //   } else {
-    //       console.log("domain is not good!");
-    //       $(this).parent().find(".error").show();
-    //       $(this).parent().find(".correct").hide();
-    //       $(this).parent().find(".incorrect").fadeIn();
-    //   }
-    // });
+    function inlineValidate(t, o) {
+        var i;
+        for (i in o) {
+            $(t).parent().find(i)[o[i]]();
+        }
+    };
+    //END INLINE VALIDATION
 
     // Full form - onclick validation
     function validate(){
@@ -274,15 +194,6 @@ $(document).ready(function(){
         $("#result3").text(letnum + " is not a valid address");
         $("#result3").css("color", "red");
       };
-
-      // var aptnum = $("#aptnum").val();
-      // if (validateAptNum(aptnum)) {
-      //   console.log("apt num is valid - yay!");
-      // } else {
-      //   console.log("apt num is NOT valid");
-      //   $("#result4").text(aptnum + " is not a valid apartment number");
-      //   $("#result4").css("color", "red");
-      // };
 
       var zipcode= $("#zip").val();
       if (validateZip(zipcode)) {
